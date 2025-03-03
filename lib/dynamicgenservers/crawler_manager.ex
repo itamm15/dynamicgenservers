@@ -23,4 +23,8 @@ defmodule Dynamicgenservers.CrawlerManager do
         pid
     end
   end
+
+  def terminate_crawler(pid) do
+    DynamicSupervisor.terminate_child(DynamicClawlerSupervisor, pid)
+  end
 end
