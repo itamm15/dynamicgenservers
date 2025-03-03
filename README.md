@@ -1,18 +1,19 @@
 # Dynamicgenservers
 
-To start your Phoenix server:
-
-  * Run `mix setup` to install and setup dependencies
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
-
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
-
-## Learn more
-
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+```elixir
+iex(1)> Dynamicgenservers.CrawlerManager.start_crawler("one")
+#PID<0.358.0>
+iex(2)> DynamicSupervisor.count_children(Dynamicgenservers.CrawlerManager.DynamicClawlerSupervisor)
+%{active: 1, workers: 1, supervisors: 0, specs: 1}
+iex(3)> Dynamicgenservers.CrawlerManager.start_crawler("second")
+#PID<0.359.0>
+iex(4)> DynamicSupervisor.count_children(Dynamicgenservers.CrawlerManager.DynamicClawlerSupervisor)
+%{active: 2, workers: 2, supervisors: 0, specs: 2}
+iex(5)> pid = GenServer.whereis({:global, "one"})
+#PID<0.358.0>
+iex(6)> Dynamicgenservers.CrawlerManager.terminate_crawler(pid)
+:ok
+iex(7)> DynamicSupervisor.count_children(Dynamicgenservers.CrawlerManager.DynamicClawlerSupervisor)
+%{active: 1, workers: 1, supervisors: 0, specs: 1}
+iex(8)>
+```
