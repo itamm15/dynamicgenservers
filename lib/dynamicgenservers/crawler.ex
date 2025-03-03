@@ -2,7 +2,7 @@ defmodule Dynamicgenservers.Crawler do
   use GenServer
 
   def start_link(url) do
-    GenServer.start_link(__MODULE__, %{url: url}, name: {:global, url})
+    GenServer.start_link(__MODULE__, %{url: url}, name: {:global, url[:url]})
   end
 
   @impl GenServer

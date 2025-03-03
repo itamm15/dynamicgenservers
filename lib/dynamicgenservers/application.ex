@@ -16,6 +16,8 @@ defmodule Dynamicgenservers.Application do
       {Finch, name: Dynamicgenservers.Finch},
       # Start a worker by calling: Dynamicgenservers.Worker.start_link(arg)
       # {Dynamicgenservers.Worker, arg},
+      # Dynamic crawlers supervisor
+      {Dynamicgenservers.CrawlerManager.DynamicClawlerSupervisor, name: :dynamic_clawler},
       # Start to serve requests, typically the last entry
       DynamicgenserversWeb.Endpoint
     ]
