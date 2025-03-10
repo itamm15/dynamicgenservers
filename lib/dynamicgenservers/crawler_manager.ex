@@ -14,8 +14,8 @@ defmodule Dynamicgenservers.CrawlerManager do
     end
   end
 
-  def start_crawler(url) do
-    case DynamicSupervisor.start_child(DynamicClawlerSupervisor, {Crawler, url: url}) do
+  def start_crawler(state) do
+    case DynamicSupervisor.start_child(DynamicClawlerSupervisor, {Crawler, state}) do
       {:ok, pid} ->
         pid
 
